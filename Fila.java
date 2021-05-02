@@ -4,40 +4,39 @@ public class Fila<T> {
 	private No<T> fim;
 	private No<T> inicio;
 	private String fila[];
-	
-	
-	//metodo para inserir no topo da pilha (inicio)
-	public void push(T info) {
+	private int tamanho;
+
+	// metodo para inserir no final da lista
+	public void enqueue(T info) {
 		No<T> aux = new No<T>(info);
-		if(isEmpty()) { // retornar true se estiver vazia ou false caso contrario
+		if (tamanho == 0) { // verifica se a lista está vazia
 			inicio = aux;
-		} else {
-			inicio.esq = aux;
-			aux.dir = inicio;
-			inicio = aux;
+			fim = aux;
+		} else { // executa a partir do segundo nó da lista
+			fim.dir = aux;
+			aux.esq = fim;
 		}
-		
-				
-	}
-	
-	// metodo para verificar se a fila esta vazia
-	public boolean isEmpty() {
-		return inicio == null? true : false;
+		fim = aux;
+		tamanho++; // incrementando o tamanho da lista
 	}
 
-	// metodo para remover e retornar o elemento do topo --> nao pode remover se estiver vazia
-	public T pop() {
+	// metodo para verificar se a fila esta vazia
+	public boolean isEmpty() {
+		return inicio == fim ? true : false;
+	}
+
+	// metodo para remover e retornar o elemento do topo --> nao pode remover se
+	// estiver vazia
+	public T dequeue() {
 		T elemento = null;
 		No<T> aux = inicio;
-		
-		if(!isEmpty()) {
-			if(size() == 1) {
-				inicio = null;
-			} else {
-				inicio = aux.dir;
-				aux.dir.esq = null;
-				aux.dir = null;
-			}
+
+		if (!isEmpty()) {
+
+			inicio = aux.dir;
+			aux.dir.esq = null;
+			aux.dir = null;
+
 			elemento = aux.info;
 			aux = null;
 
@@ -49,13 +48,11 @@ public class Fila<T> {
 	public int size() {
 		No<T> aux = inicio;
 		int qtd = 0;
-		while( aux != null) {
+		while (aux != null) {
 			qtd++;
 			aux = aux.dir;
 		}
 		return qtd;
 	}
-	
 
-	
 }

@@ -24,7 +24,7 @@ public class Principal {
 
             switch (opcao) {
                 case 1:
-                    if (lista.size() < 4) {
+                    if (lista.size() < 5) {
                         mesa++;
                         lista.add(ReservarMesa(lista, mesa));
 
