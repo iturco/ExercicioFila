@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
-        Fila<Reserva> fila = new Fila;
+        Fila<Reserva> fila = new Fila();
         Scanner sc = new Scanner(System.in);
         int opcao;
         do {
@@ -18,7 +18,7 @@ public class Principal {
 
             switch (opcao) {
             case 1:
-                    fila.add(ReservarMesa(fila));
+                    fila.enqueue(ReservarMesa(fila));
                 break;
             case 2:
                 Pesquisar(fila);
@@ -149,4 +149,7 @@ public class Principal {
 
 
     // Cancelar
+    public static RemoverDaFila() {
+        //dequeue()
+    }
 }

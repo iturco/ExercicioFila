@@ -1,38 +1,40 @@
 
 //classe parametrizada
 public class Fila<T> {
-	private No<T> topo;
+	private No<T> fim;
+	private No<T> inicio;
+	private String fila[];
 	
 	
 	//metodo para inserir no topo da pilha (inicio)
 	public void push(T info) {
 		No<T> aux = new No<T>(info);
 		if(isEmpty()) { // retornar true se estiver vazia ou false caso contrario
-			topo = aux;
+			fim = aux;
 		} else {
-			topo.esq = aux;
-			aux.dir = topo;
-			topo = aux;
+			fim.esq = aux;
+			aux.dir = fim;
+			fim = aux;
 		}
 		
 				
 	}
 	
-	// metodo para verificar so o topo da pilha é igual a null
+	// metodo para verificar se a fila esta vazia
 	public boolean isEmpty() {
-		return topo == null? true : false;
+		return fim == null? true : false;
 	}
 
 	// metodo para remover e retornar o elemento do topo --> nao pode remover se estiver vazia
 	public T pop() {
 		T elemento = null;
-		No<T> aux = topo;
+		No<T> aux = fim;
 		
 		if(!isEmpty()) {
 			if(size() == 1) {
-				topo = null;
+				fim = null;
 			} else {
-				topo = aux.dir;
+				fim = aux.dir;
 				aux.dir.esq = null;
 				aux.dir = null;
 			}
@@ -43,9 +45,9 @@ public class Fila<T> {
 		return elemento;
 	}
 
-	// metodo para retornar o tamanho da pilha (qtd de elementos) --> size()
+	// metodo para retornar o tamanho da fila (qtd de elementos) --> size()
 	public int size() {
-		No<T> aux = topo;
+		No<T> aux = fim;
 		int qtd = 0;
 		while( aux != null) {
 			qtd++;
@@ -54,13 +56,6 @@ public class Fila<T> {
 		return qtd;
 	}
 	
-	// metodo para retornar o elemento armazenado no topo, se a pilha não estiver vazia
-	public T top() {
-		if(isEmpty()) {
-			return null;
-		}
-		return topo.info;
-		
-	}
+
 	
 }
