@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class Principal {
 
+
+        //IGOR TURCO ANTUNES RA: 144510
+        //IAN FREITAG RA: 144784
+
+        
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         List<Reserva> lista = new ArrayList<>();
