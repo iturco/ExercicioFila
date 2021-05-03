@@ -9,15 +9,15 @@ public class Fila<T> {
 	// metodo para inserir no final da lista
 	public void enqueue(T info) {
 		No<T> aux = new No<T>(info);
-		if (tamanho == 0) { // verifica se a lista está vazia
+		if (tamanho == 0) {
 			inicio = aux;
 			fim = aux;
-		} else { // executa a partir do segundo nó da lista
+		} else {
 			fim.dir = aux;
 			aux.esq = fim;
 		}
 		fim = aux;
-		tamanho++; // incrementando o tamanho da lista
+		tamanho++; 
 	}
 
 	// metodo para verificar se a fila esta vazia
@@ -44,7 +44,7 @@ public class Fila<T> {
 		return elemento;
 	}
 
-	// metodo para retornar o tamanho da fila (qtd de elementos) --> size()
+	// metodo para retornar o tamanho da fila (qtd de elementos)
 	public int size() {
 		No<T> aux = inicio;
 		int qtd = 0;
@@ -54,5 +54,14 @@ public class Fila<T> {
 		}
 		return qtd;
 	}
+
+	public void imprimir() {
+        No<T> aux = inicio;
+        while(aux != null) {
+            System.out.println(aux.info);
+            aux = aux.dir;
+
+        }
+    }
 
 }

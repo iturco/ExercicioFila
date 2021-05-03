@@ -7,7 +7,7 @@ public class Principal {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         List<Reserva> lista = new ArrayList<>();
-        Fila<Reserva> espera = new Fila();
+        Fila<Reserva> espera = new Fila<>();
 
         int opcao;
         int mesa = 0;
@@ -26,12 +26,12 @@ public class Principal {
                 case 1:
                     if (lista.size() < 5) {
                         mesa++;
-                        lista.add(ReservarMesa(lista, mesa));
+                        lista.add(ReservarMesa(lista, espera, mesa));
 
                     } else {
-                        System.out.println("Sua reserva será colocada na lista de espera");
+                        System.out.println("Sua reserva será colocada na fila de espera");
                         mesa++;
-                        espera.enqueue(ReservarMesa(espera, mesa));
+                        espera.enqueue(ReservarMesa(lista, espera, mesa));
 
                     }
                     break;
@@ -42,7 +42,7 @@ public class Principal {
                     System.out.println(lista);
                     break;
                 case 4:
-                    System.out.println(espera);
+                    espera.imprimir();
                     break;
                 case 5:
                     mesa--;
@@ -56,7 +56,7 @@ public class Principal {
     }
 
     // RESERVA DA MESA
-    public static Reserva ReservarMesa(List<Reserva> lista, int mesa) {
+    public static Reserva ReservarMesa(List<Reserva> lista, Fila<Reserva> espera, int mesa) {
         Scanner sc = new Scanner(System.in);
         Cliente cliente = null;
         boolean avista = true;
@@ -166,7 +166,7 @@ public class Principal {
 
         System.out.print("\n Cancelar por CPF ou CNPJ?  ");
         String opcao3 = sc.nextLine().toLowerCase();
-
+        Reserva inverter = new Reserva(null, false);
         switch (opcao3) {
             case "cpf":
                 System.out.print("\n Qual CPF deseja cancelar a reserva?  ");
@@ -182,9 +182,8 @@ public class Principal {
                             System.out.println();
                             lista.remove(i);
                             if (lista.size() > 5) {
-                                Reserva inverter = espera;
+                                inverter = espera.dequeue();
                                 lista.add(inverter);
-                                espera.dequeue;
                             }
 
                         } else {
@@ -209,9 +208,8 @@ public class Principal {
                             System.out.println();
                             lista.remove(i);
                             if (lista.size() > 5) {
-                                Reserva inverter = espera.get(0);
+                                inverter = espera.dequeue();
                                 lista.add(inverter);
-                                espera.remove(espera.get(0));
                             }
 
                         } else {
